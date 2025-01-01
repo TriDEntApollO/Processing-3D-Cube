@@ -30,13 +30,14 @@ There are some keyboard inputs to control the rotation of the cube on screen :-
 - E/e : Rotates the cube along the Z-axis in the positive direction
 - R/r : Resets the rotation angles of all the axes to zero
 - T/t : Toggles auto rotation on and off
+- Space bar : Toggles auto rotation on and off
 
 On sreen number box inputs (scroll or drag on top to control) :-
 
-- X_Axis_Rotation_Modifier : Sets the rotation rate/modifier for X-axis
-- Y_Axis_Rotation_Modifier : Sets the rotation rate/modifier for Y-axis
-- Z_Axis_Rotation_Modifier : Sets the rotation rate/modifier for Z-axis
-- Rotation_Frequency: Sets the fequency of rotations
+- X_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for X-axis (in milli-revolutions)
+- Y_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Y-axis (in milli-revolutions)
+- Z_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Z-axis (in milli-revolutions)
+- Rotation_Delay: Sets the delay between each rotation (in milliseconds)
 
 ### Note
-Actual rotation = rotation modifier of the axis / rotation frequency 
+Actual revolution amount = rotation multiplier of the axis / 1000; 

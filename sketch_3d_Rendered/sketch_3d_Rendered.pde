@@ -3,17 +3,16 @@ import controlP5.*;
 ControlP5 cp5;
 
 boolean autoRotation = true; 
-PVector[] points = new PVector[8];
-float Rotation_Frequency = 1000;
-float X_Axis_Rotation_Modifier = 1;
-float Y_Axis_Rotation_Modifier = 1;
-float Z_Axis_Rotation_Modifier = 1;
-float rotationDelay = 1 / Rotation_Frequency, fps = frameRate;
-float thetaX = 0, thetaY = 0, thetaZ = 0;
-int size = 150, ratio = 4, FOV = size * ratio;
-int currentTime, previousTime = 0, previousTimeFPS = 0,intervalTime = 1000;
+PVector[] points = new PVector[8]; // Points/verices of the cube
+float X_Axis_Rotation_Multiplier = 1; // X-Axis Rotation Multiplier in degrees
+float Y_Axis_Rotation_Multiplier = 1; // X-Axis Rotation Multiplier in degrees
+float Z_Axis_Rotation_Multiplier = 1; // X-Axis Rotation Multiplier in degrees
+float thetaX = 0, thetaY = 0, thetaZ = 0; // Angle of rotation in radians (rad)
+float Rotation_Delay = 10, fps = frameRate; // Rotation delay in milliseconds
+int size = 150, ratio = 4, FOV = size * ratio; // Size of the cube and FOV of the camera
+int currentTime, previousTime = 0, previousTimeFPS = 0; // Time variables for calclulating delay and displaying FPS
 
-String[] textfieldNames = {"X_Axis_Rotation_Modifier", "Y_Axis_Rotation_Modifier", "Z_Axis_Rotation_Modifier"};
+String[] textfieldNames = {"X_Axis_Rotation_Multiplier", "Y_Axis_Rotation_Multiplier", "Z_Axis_Rotation_Multiplier"}; // Input feild names
 
 void setup() {
   //size(128, 160);
@@ -37,14 +36,16 @@ void setup() {
        .setPosition(x,20)
        .setSize(60, 30)
        .setMultiplier(1)
-       .setValue(1);
+       .setValue(1)
+       .setRange(-360, 360);
      x += spacing;
   }
-  cp5.addNumberbox("Rotation_Frequency")
+  cp5.addNumberbox("Rotation_Delay")
        .setPosition(x,20)
        .setSize(60, 30)
        .setMultiplier(10)
-       .setValue(1000);
+       .setValue(10)
+       .setRange(0, 1000);
 }
 
 void draw() {
@@ -55,10 +56,10 @@ void draw() {
     fps = frameRate;
      previousTimeFPS = currentTime;
   }
-  if (autoRotation && currentTime - previousTime >= intervalTime * rotationDelay) {
-    thetaX += 1 * X_Axis_Rotation_Modifier * rotationDelay;
-    thetaY += 1 * Y_Axis_Rotation_Modifier * rotationDelay;
-    thetaZ += 1 * Z_Axis_Rotation_Modifier * rotationDelay;
+  if (autoRotation && currentTime - previousTime >= Rotation_Delay) {
+    thetaX += 1 * radian(X_Axis_Rotation_Multiplier);
+    thetaY += 1 * radian(Y_Axis_Rotation_Multiplier);
+    thetaZ += 1 * radian(Z_Axis_Rotation_Multiplier);
     
     previousTime = millis();
   }
@@ -68,18 +69,18 @@ void draw() {
 
 void keyPressed() {
   if (key == 'w' || key == 'W') 
-    thetaX -= 1 * X_Axis_Rotation_Modifier;
+    thetaX -= 1 * radian(X_Axis_Rotation_Multiplier);
   if (key == 's' || key == 'S')
-    thetaX += 1 * X_Axis_Rotation_Modifier;
+    thetaX += 1 * radian(X_Axis_Rotation_Multiplier);
   if (key == 'a' || key == 'A')
-    thetaY += 1 * Y_Axis_Rotation_Modifier;
+    thetaY += 1 * radian(Y_Axis_Rotation_Multiplier);
   if (key == 'd' || key == 'D')
-    thetaY -= 1 * Y_Axis_Rotation_Modifier;
+    thetaY -= 1 * radian(Y_Axis_Rotation_Multiplier);
   if (key == 'q' || key == 'Q')
-    thetaZ -= 1 * Z_Axis_Rotation_Modifier;
+    thetaZ -= 1 * radian(Z_Axis_Rotation_Multiplier);
   if (key == 'e' || key == 'E')
-    thetaZ += 1 * Z_Axis_Rotation_Modifier;
-  if (key == 't' || key == 'T')
+    thetaZ += 1 * radian(Z_Axis_Rotation_Multiplier);
+  if (key == 't' || key == 'T' || key == ' ')
     autoRotation = !autoRotation;
   if (key == 'r' || key == 'R') {
     thetaX = 0;
@@ -95,57 +96,57 @@ void drawText() {
   
   int gap = 10, labelWidth = 120;
   int xPos = height-20;
-  float radX, radY, radZ, degX, degY, degZ;
+  float degX, degY, degZ, revX, revY, revZ;
+
+  revX = revolutions(thetaX);
+  revY = revolutions(thetaY);
+  revZ = revolutions(thetaZ);
 
   fill(255, 0, 0);
   text("Rotation-X: ", gap, xPos);
   fill(255);
-  text(formatP(thetaX), labelWidth + gap, xPos);
+  text(formatP(revX), labelWidth + gap, xPos);
   fill(0, 255, 0);
   text("Rotation-Y: ", width * 1 / 3 + gap, xPos);
   fill(255);
-  text(formatP(thetaY), width * 1 / 3 + labelWidth + gap, xPos);
+  text(formatP(revY), width * 1 / 3 + labelWidth + gap, xPos);
   fill(0, 0, 255);
   text("Rotation-Z: ", width * 2 / 3 + gap, xPos);
   fill(255);
-  text(formatP(thetaZ), width * 2 / 3 + labelWidth + gap, xPos);
+  text(formatP(revZ), width * 2 / 3 + labelWidth + gap, xPos);
 
-  xPos -= 40;
-  radX = radian(thetaX);
-  radY = radian(thetaY);
-  radZ = radian(thetaZ);
-
-  fill(255, 0, 0);
-  text("Angle-X: ", gap, xPos);
-  fill(255);
-  text(formatP(radX) + " rad", labelWidth + gap, xPos);
-  fill(0, 255, 0);
-  text("Angle-Y: ", width * 1 / 3 + gap, xPos);
-  fill(255);
-  text(formatP(radY) + " rad", width * 1 / 3 + labelWidth + gap, xPos);
-  fill(0, 0, 255);
-  text("Angle-Z: ", width * 2 / 3 + gap, xPos);
-  fill(255);
-  text(formatP(radZ) + " rad", width * 2 / 3 + labelWidth + gap, xPos);
-
-  xPos -= 40;
+  xPos -= 20;  
   degX = degree(thetaX);
   degY = degree(thetaY);
   degZ = degree(thetaZ);
-  
+
   fill(255, 0, 0);
   text("Degree-X: ", gap, xPos);
   fill(255);
-  text(formatP(degX) + "°", labelWidth + gap, xPos);
+  text(formatP(degX) + " °", labelWidth + gap, xPos);
   fill(0, 255, 0);
   text("Degree-Y: ", width * 1 / 3 + gap, xPos);
   fill(255);
-  text(formatP(degY) + "°", width * 1 / 3 + labelWidth + gap, xPos);
+  text(formatP(degY) + " °", width * 1 / 3 + labelWidth + gap, xPos);
   fill(0, 0, 255);
   text("Degree-Z: ", width * 2 / 3 + gap, xPos);
   fill(255);
-  text(formatP(degZ) + "°", width * 2 / 3 + labelWidth + gap, xPos);
+  text(formatP(degZ) + " °", width * 2 / 3 + labelWidth + gap, xPos);
 
+  xPos -= 20;
+  
+  fill(255, 0, 0);
+  text("Angle-X: ", gap, xPos);
+  fill(255);
+  text(formatP(thetaX) + " rad", labelWidth + gap, xPos);
+  fill(0, 255, 0);
+  text("Angle-Y: ", width * 1 / 3 + gap, xPos);
+  fill(255);
+  text(formatP(thetaY) + " rad", width * 1 / 3 + labelWidth + gap, xPos);
+  fill(0, 0, 255);
+  text("Angle-Z: ", width * 2 / 3 + gap, xPos);
+  fill(255);
+  text(formatP(thetaZ) + " rad", width * 2 / 3 + labelWidth + gap, xPos);
 }
   
 void drawCube() {
@@ -211,15 +212,18 @@ String format(float number) {
 } 
 
 String formatP(float number) {
-    float decimal = 2;
+    float decimal = 3;
     float num = (float)(round((number*pow(10, decimal))))/pow(10, decimal);
     return num >=0 ? "+" + str(num) : str(num);
 } 
 
-float radian(float rotation) {
-  return rotation * 2 * PI;
+float radian(float degree) {
+  return degree * PI / 180;
+}
+float degree(float radian) {
+  return radian * 180 / PI;
 }
 
-float degree(float rotation) {
-  return rotation * 360;
+float revolutions(float degree) {
+  return degree / 360;
 }
