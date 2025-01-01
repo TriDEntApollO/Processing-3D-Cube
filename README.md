@@ -34,10 +34,10 @@ There are some keyboard inputs to control the rotation of the cube on screen :-
 
 On sreen number box inputs (scroll or drag on top to control) :-
 
-- X_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for X-axis (in milli-revolutions)
-- Y_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Y-axis (in milli-revolutions)
-- Z_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Z-axis (in milli-revolutions)
+- X_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for X-axis (in degrees)
+- Y_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Y-axis (in degrees)
+- Z_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Z-axis (in degrees)
 - Rotation_Delay: Sets the delay between each rotation (in milliseconds)
 
 ### Note
-Actual revolution amount = rotation multiplier of the axis / 1000; 
+Actual revolution amount = last rotation amount + rotation multiplier of the axis (the rotation adds over time)
