@@ -6,6 +6,10 @@ I uploaded this because I wanted to keep a reference for the furture projects.
 
 Check out the code it you want to ;)
 
+## Preview
+
+![The GUI interface](https://github.com/user-attachments/assets/62b2abea-270c-4534-a76d-557fed6d58ab)
+*The GUI interface*
 
 ## What is Processing?
 
