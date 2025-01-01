@@ -57,9 +57,9 @@ void draw() {
      previousTimeFPS = currentTime;
   }
   if (autoRotation && currentTime - previousTime >= Rotation_Delay) {
-    thetaX += 1 * radian(X_Axis_Rotation_Multiplier);
-    thetaY += 1 * radian(Y_Axis_Rotation_Multiplier);
-    thetaZ += 1 * radian(Z_Axis_Rotation_Multiplier);
+    thetaX += radian(X_Axis_Rotation_Multiplier);
+    thetaY += radian(Y_Axis_Rotation_Multiplier);
+    thetaZ += radian(Z_Axis_Rotation_Multiplier);
     
     previousTime = millis();
   }
@@ -69,17 +69,17 @@ void draw() {
 
 void keyPressed() {
   if (key == 'w' || key == 'W') 
-    thetaX -= 1 * radian(X_Axis_Rotation_Multiplier);
+    thetaX -= radian(X_Axis_Rotation_Multiplier);
   if (key == 's' || key == 'S')
-    thetaX += 1 * radian(X_Axis_Rotation_Multiplier);
+    thetaX += radian(X_Axis_Rotation_Multiplier);
   if (key == 'a' || key == 'A')
-    thetaY += 1 * radian(Y_Axis_Rotation_Multiplier);
+    thetaY += radian(Y_Axis_Rotation_Multiplier);
   if (key == 'd' || key == 'D')
-    thetaY -= 1 * radian(Y_Axis_Rotation_Multiplier);
+    thetaY -= radian(Y_Axis_Rotation_Multiplier);
   if (key == 'q' || key == 'Q')
-    thetaZ -= 1 * radian(Z_Axis_Rotation_Multiplier);
+    thetaZ -= radian(Z_Axis_Rotation_Multiplier);
   if (key == 'e' || key == 'E')
-    thetaZ += 1 * radian(Z_Axis_Rotation_Multiplier);
+    thetaZ += radian(Z_Axis_Rotation_Multiplier);
   if (key == 't' || key == 'T' || key == ' ')
     autoRotation = !autoRotation;
   if (key == 'r' || key == 'R') {
