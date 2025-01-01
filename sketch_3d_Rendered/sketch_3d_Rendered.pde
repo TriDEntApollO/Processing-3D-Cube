@@ -28,12 +28,12 @@ void setup() {
   points[7] = new PVector(-size, size, size);
   
   cp5 = new ControlP5(this);
-  int x = 20;
+  int x = 20, y = height / 40;
   int spacing = (width - 160) / 4;
 
   for(String name: textfieldNames){
     cp5.addNumberbox(name)
-       .setPosition(x,20)
+       .setPosition(x, y)
        .setSize(60, 30)
        .setMultiplier(1)
        .setValue(1)
@@ -41,7 +41,7 @@ void setup() {
      x += spacing;
   }
   cp5.addNumberbox("Rotation_Delay")
-       .setPosition(x,20)
+       .setPosition(x, y)
        .setSize(60, 30)
        .setMultiplier(10)
        .setValue(10)
@@ -92,10 +92,10 @@ void keyPressed() {
 void drawText() {
   noStroke();
   textSize(25);
-  text("FPS: " + format(fps), width-200, 50);
+  text("FPS: " + format(fps), width * 5 / 6, height / 20);
   
-  int gap = 10, labelWidth = 120;
-  int xPos = height-20;
+  int gap = 22, labelWidth = 125;
+  int xPos = height * 39/40;
   float degX, degY, degZ, revX, revY, revZ;
 
   revX = revolutions(thetaX);
