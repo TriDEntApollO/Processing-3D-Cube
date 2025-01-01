@@ -4,15 +4,15 @@ ControlP5 cp5;
 
 boolean autoRotation = true; 
 PVector[] points = new PVector[8];
-float X_axis_Rotation_Rate = 0.01;
-float Y_axis_Rotation_Rate = 0.01;
-float Z_axis_Rotation_Rate = 0.01;
+float X_Axis_Rotation_Rate = 0.01;
+float Y_Axis_Rotation_Rate = 0.01;
+float Z_Axis_Rotation_Rate = 0.01;
 float delay = 0.01, fps = frameRate;
 float thetaX = 0, thetaY = 0, thetaZ = 0;
 int size = 150, ratio = 4, FOV = size * ratio;
 int currentTime, previousTime = 0, previousTimeFPS = 0,intervalTime = 1000;
 
-String[] textfieldNames = {"X_axis_Rotation_Rate", "Y_axis_Rotation_Rate", "Z_axis_Rotation_Rate"};
+String[] textfieldNames = {"X_Axis_Rotation_Rate", "Y_Axis_Rotation_Rate", "Z_Axis_Rotation_Rate"};
 
 void setup() {
   //size(128, 160);
@@ -49,9 +49,9 @@ void draw() {
      previousTimeFPS = currentTime;
   }
   if (autoRotation && currentTime - previousTime >= intervalTime * delay) {
-    thetaX += 1 * X_axis_Rotation_Rate;
-    thetaY += 1 * Y_axis_Rotation_Rate;
-    thetaZ += 1 * Z_axis_Rotation_Rate;
+    thetaX += 1 * X_Axis_Rotation_Rate;
+    thetaY += 1 * Y_Axis_Rotation_Rate;
+    thetaZ += 1 * Z_Axis_Rotation_Rate;
     
     previousTime = millis();
   }
@@ -61,17 +61,17 @@ void draw() {
 
 void keyPressed() {
   if (key == 'w' || key == 'W') 
-    thetaX -= 1 * X_axis_Rotation_Rate;
+    thetaX -= 1 * X_Axis_Rotation_Rate;
   if (key == 's' || key == 'S')
-    thetaX += 1 * X_axis_Rotation_Rate;
+    thetaX += 1 * X_Axis_Rotation_Rate;
   if (key == 'a' || key == 'A')
-    thetaY += 1 * Y_axis_Rotation_Rate;
+    thetaY += 1 * Y_Axis_Rotation_Rate;
   if (key == 'd' || key == 'D')
-    thetaY -= 1 * Y_axis_Rotation_Rate;
+    thetaY -= 1 * Y_Axis_Rotation_Rate;
   if (key == 'q' || key == 'Q')
-    thetaZ -= 1 * Z_axis_Rotation_Rate;
+    thetaZ -= 1 * Z_Axis_Rotation_Rate;
   if (key == 'e' || key == 'E')
-    thetaZ += 1 * Z_axis_Rotation_Rate;
+    thetaZ += 1 * Z_Axis_Rotation_Rate;
   if (key == 't' || key == 'T')
     autoRotation = !autoRotation;
   if (key == 'r' || key == 'R') {
