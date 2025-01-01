@@ -33,6 +33,10 @@ There are some keyboard inputs to control the rotation of the cube on screen :-
 
 On sreen number box inputs (scroll or drag on top to control) :-
 
-- X_Axis_Rotation_Rate : Sets the rotation rate/modifier for X-axis
-- Y_Axis_Rotation_Rate : Sets the rotation rate/modifier for Y-axis
-- Z_Axis_Rotation_Rate : Sets the rotation rate/modifier for Z-axis
+- X_Axis_Rotation_Modifier : Sets the rotation rate/modifier for X-axis
+- Y_Axis_Rotation_Modifier : Sets the rotation rate/modifier for Y-axis
+- Z_Axis_Rotation_Modifier : Sets the rotation rate/modifier for Z-axis
+- Rotation_Frequency: Sets the fequency of rotations
+
+### Note
+Actual rotation = rotation modifier of the axis / rotation frequency 
