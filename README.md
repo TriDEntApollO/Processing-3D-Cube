@@ -6,6 +6,8 @@ I uploaded this because I wanted to keep a reference for the furture projects.
 
 Check out the code it you want to ;)
 
+P.S. Don't judge the code, i did not structure anything in a very proper manner and there might be reuntant code and variables
+
 ## Preview
 
 ![The GUI interface](https://github.com/user-attachments/assets/62b2abea-270c-4534-a76d-557fed6d58ab)
@@ -41,7 +43,7 @@ On sreen number box inputs (scroll or drag on top to control) :-
 - X_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for X-axis (in degrees)
 - Y_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Y-axis (in degrees)
 - Z_Axis_Rotation_Multiplier : Sets the rotation rate/modifier for Z-axis (in degrees)
-- Rotation_Delay: Sets the delay between each rotation (in milliseconds)
+- Rotation_Delay: Sets the delay between each rotation/ticks (in milliseconds)
 
 ### Note
-Actual revolution amount = last rotation amount + rotation multiplier of the axis (the rotation adds over time)
+Rotation modifier is the amount of rotation applied along an axis to the cube after each tick (rotation delay)
